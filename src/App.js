@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
-import SplitPane from 'react-split-pane';
-import Markdown from './Markdown';
-import Preview from './Preview';
+
+import {
+  MarkdownInput,
+  MarkdownPreview } from 'react-marked-markdown';
 import './App.css';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+  }
+
+  handleTextChange(e) {
+    this.setState({ value: e.target.value });
+    if (this.props.onTextChange) {
+      this.props.onTextChange(e.target.value);
+    }
+  }
+
+
   render() {
     return (
-      <SplitPane className="App" split="vertical" minSize='50%' defaultSize='50%'>
-        <Markdown />
-        <Preview />
-      </SplitPane>
+      <div className="horizontal-flex">
+        <MarkdownInput
+          placeholder="Insert Markdown text here..."
+          onChange={ this.handleTextChange.bind(this) }
+          value={this.state.value}
+          className="flex-item"
+        />
+
+        <MarkdownPreview
+          value={this.state.value}
+          className="flex-item"
+        />
+      </div>
     );
   }
 }
