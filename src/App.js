@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import SplitPane from 'react-split-pane';
+import Markdown from './Markdown';
+import Preview from './Preview';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <SplitPane split="vertical" minSize='50%' defaultSize='50%'>
-        <div>Left</div>
-        <div>Right</div>
+      <SplitPane className="App" split="vertical" minSize='50%' defaultSize='50%'>
+        <Markdown />
+        <Preview />
       </SplitPane>
     );
   }
 }
-
-export default App;
